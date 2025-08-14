@@ -5,6 +5,7 @@
   <title>Portafolio — María José Duarte Torres</title>
   <meta name="description" content="Portafolio profesional de María José Duarte Torres: Arquitecta, investigadora y programadora. Proyectos en arquitectura, código, investigación y podcast.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- OpenGraph -->
   <meta property="og:title" content="Portafolio — María José Duarte Torres">
   <meta property="og:description" content="Arquitecta, investigadora y programadora. Proyectos destacados.">
@@ -14,7 +15,7 @@
 
   <!-- Google Fonts: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Tailwind CDN (optional, can be disabled in styles.css) -->
+  <!-- Tailwind CDN (opcional) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
@@ -24,7 +25,8 @@
   <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50 transition-colors">
     <span class="text-lg font-semibold text-gray-800 dark:text-gray-200" aria-live="polite">Cargando contenido…</span>
   </div>
-  <!-- Hero Section -->
+
+  <!-- Hero -->
   <header class="hero fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-30">
     <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between py-4 px-6">
       <div>
@@ -39,8 +41,20 @@
       </div>
     </div>
   </header>
+
   <main class="pt-32 pb-10 max-w-5xl mx-auto px-4">
-    <!-- Arquitectura -->
+    <!-- Podcast (1º) -->
+    <section id="podcast" class="mb-16" aria-labelledby="podcast-title">
+      <h3 id="podcast-title" class="section-title">Podcast</h3>
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" data-section="podcast" aria-label="Anterior">←</button>
+        <div class="slider" id="slider-podcast" role="region" aria-label="Podcast"></div>
+        <button class="slider-btn slider-next" data-section="podcast" aria-label="Siguiente">→</button>
+      </div>
+      <div class="slider-dots" id="dots-podcast"></div>
+    </section>
+
+    <!-- Arquitectura (2º) -->
     <section id="arquitectura" class="mb-16" aria-labelledby="arquitectura-title">
       <h3 id="arquitectura-title" class="section-title">Arquitectura</h3>
       <div id="arquitectura-tags" class="tags mb-4"></div>
@@ -51,18 +65,8 @@
       </div>
       <div class="slider-dots" id="dots-arquitectura"></div>
     </section>
-    <!-- Programación -->
-    <section id="programacion" class="mb-16" aria-labelledby="programacion-title">
-      <h3 id="programacion-title" class="section-title">Programación</h3>
-      <div id="programacion-tags" class="tags mb-4"></div>
-      <div class="slider-wrapper">
-        <button class="slider-btn slider-prev" data-section="programacion" aria-label="Anterior">←</button>
-        <div class="slider" id="slider-programacion" role="region" aria-label="Proyectos de código"></div>
-        <button class="slider-btn slider-next" data-section="programacion" aria-label="Siguiente">→</button>
-      </div>
-      <div class="slider-dots" id="dots-programacion"></div>
-    </section>
-    <!-- Investigación -->
+
+    <!-- Investigación (3º) -->
     <section id="investigacion" class="mb-16" aria-labelledby="investigacion-title">
       <h3 id="investigacion-title" class="section-title">Investigación</h3>
       <div class="slider-wrapper">
@@ -72,16 +76,19 @@
       </div>
       <div class="slider-dots" id="dots-investigacion"></div>
     </section>
-    <!-- Podcast -->
-    <section id="podcast" class="mb-16" aria-labelledby="podcast-title">
-      <h3 id="podcast-title" class="section-title">Podcast</h3>
+
+    <!-- Programas (4º; renombrado) -->
+    <section id="programas" class="mb-16" aria-labelledby="programas-title">
+      <h3 id="programas-title" class="section-title">Programas</h3>
+      <div id="programas-tags" class="tags mb-4"></div>
       <div class="slider-wrapper">
-        <button class="slider-btn slider-prev" data-section="podcast" aria-label="Anterior">←</button>
-        <div class="slider" id="slider-podcast" role="region" aria-label="Podcast"></div>
-        <button class="slider-btn slider-next" data-section="podcast" aria-label="Siguiente">→</button>
+        <button class="slider-btn slider-prev" data-section="programas" aria-label="Anterior">←</button>
+        <div class="slider" id="slider-programas" role="region" aria-label="Proyectos de código"></div>
+        <button class="slider-btn slider-next" data-section="programas" aria-label="Siguiente">→</button>
       </div>
-      <div class="slider-dots" id="dots-podcast"></div>
+      <div class="slider-dots" id="dots-programas"></div>
     </section>
+
     <!-- Contacto -->
     <section id="contacto" class="mb-16" aria-labelledby="contacto-title">
       <h3 id="contacto-title" class="section-title">Contacto</h3>
@@ -108,11 +115,13 @@
       </div>
     </section>
   </main>
+
   <!-- Modal -->
   <div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Detalles" tabindex="-1">
     <div class="modal" id="modalContent" tabindex="0"></div>
     <button class="modal-close" id="modalClose" aria-label="Cerrar modal">✖</button>
   </div>
+
   <!-- Footer -->
   <footer class="footer bg-gray-50 dark:bg-gray-800 py-6 px-4 text-center">
     <div class="mb-2">
@@ -125,11 +134,19 @@
       <a href="README.md" aria-label="Ver README" class="footer-link">README.md</a>
     </div>
   </footer>
+
+  <!-- JS -->
   <script src="app.js"></script>
+
+  <!-- Scroll a Podcast desde el CTA -->
   <script>
-    // Actualiza año en footer
+    document.getElementById('exploreBtn')?.addEventListener('click', () => {
+      document.getElementById('podcast')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    // Año en footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
