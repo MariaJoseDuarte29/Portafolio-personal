@@ -1,22 +1,23 @@
 // app.js — Portafolio María José Duarte Torres
 // Funciones principales: loadJSON, renderSlider, bindSliderControls, openModal, applyFilters
 
-// Config global de secciones
+// -----------------------------
+// Config global de secciones (nuevo orden)
+// -----------------------------
 const sections = [
+  {
+    key: 'podcast',
+    json: 'content/podcast.json',
+    sliderId: 'slider-podcast',
+    dotsId: 'dots-podcast',
+    filterable: false,
+  },
   {
     key: 'arquitectura',
     json: 'content/architecture.json',
     sliderId: 'slider-arquitectura',
     dotsId: 'dots-arquitectura',
     tagsId: 'arquitectura-tags',
-    filterable: true,
-  },
-  {
-    key: 'programacion',
-    json: 'content/code.json',
-    sliderId: 'slider-programacion',
-    dotsId: 'dots-programacion',
-    tagsId: 'programacion-tags',
     filterable: true,
   },
   {
@@ -27,27 +28,34 @@ const sections = [
     filterable: false,
   },
   {
-    key: 'podcast',
-    json: 'content/podcast.json',
-    sliderId: 'slider-podcast',
-    dotsId: 'dots-podcast',
-    filterable: false,
+    key: 'programas', // <- antes 'programacion'
+    json: 'content/code.json',
+    sliderId: 'slider-programas',   // <- antes 'slider-programacion'
+    dotsId: 'dots-programas',       // <- antes 'dots-programacion'
+    tagsId: 'programas-tags',       // <- antes 'programacion-tags'
+    filterable: true,
   },
 ];
 
+// -----------------------------
 // Estado global
+// -----------------------------
 const state = {
   data: {},
-  filters: { arquitectura: null, programacion: null },
+  filters: { arquitectura: null, programas: null }, // <- antes 'programacion'
   modals: { open: false, lastFocus: null }
 };
 
-// ---- Loader ----
+// -----------------------------
+// Loader
+// -----------------------------
 function showLoader(show = true) {
   document.getElementById('loader').classList.toggle('active', show);
 }
 
-// ---- Tema (claro/oscuro) ----
+// -----------------------------
+// Tema (claro/oscuro)
+// -----------------------------
 function setTheme(theme) {
   document.documentElement.classList.toggle('dark', theme === 'dark');
   document.documentElement.classList.toggle('light', theme === 'light');
@@ -66,7 +74,9 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   setTheme(saved || (prefersDark ? 'dark' : 'light'));
 })();
 
-// ---- Carga de datos JSON ----
+// -----------------------------
+// Carga de datos JSON
+// -----------------------------
 async function loadJSON(url) {
   try {
     const res = await fetch(url);
@@ -77,38 +87,48 @@ async function loadJSON(url) {
   }
 }
 
-// ---- Renderizado de sliders ----
+// -----------------------------
+// Renderizado de sliders
+// -----------------------------
 async function renderSlider(section) {
   showLoader(true);
   const data = await loadJSON(section.json);
   state.data[section.key] = data;
+
   const slider = document.getElementById(section.sliderId);
+  if (!slider) return;
   slider.innerHTML = '';
+
   let items = data;
+
   // Filtros
   if (section.filterable && state.filters[section.key]) {
     items = items.filter(item =>
       (item.tags || []).includes(state.filters[section.key])
     );
   }
+
   if (items.length === 0) {
     slider.innerHTML = `<div class="card"><div class="card-body">No hay elementos disponibles.</div></div>`;
   } else {
     items.forEach((item, idx) => {
       let cardHtml = '';
       if (section.key === 'arquitectura') cardHtml = arquitecturaCard(item, idx);
-      if (section.key === 'programacion') cardHtml = programacionCard(item, idx);
+      if (section.key === 'programas')     cardHtml = programacionCard(item, idx); // reutilizamos la tarjeta
       if (section.key === 'investigacion') cardHtml = investigacionCard(item, idx);
-      if (section.key === 'podcast') cardHtml = podcastCard(item, idx);
+      if (section.key === 'podcast')       cardHtml = podcastCard(item, idx);
       slider.insertAdjacentHTML('beforeend', cardHtml);
     });
   }
+
   bindSliderControls(section, items.length);
   if (section.filterable) renderTags(section, data);
   showLoader(false);
 }
 
-// ---- Tarjetas ----
+// -----------------------------
+// Tarjetas
+// -----------------------------
 function arquitecturaCard(item, idx) {
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
@@ -135,7 +155,7 @@ function programacionCard(item, idx) {
           ${item.links?.github ? `<a href="${item.links.github}" class="card-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
           ${item.links?.demo ? `<a href="${item.links.demo}" class="card-btn" target="_blank" rel="noopener">Demo</a>` : ''}
         </div>
-        <button class="card-btn" data-modal="programacion" data-idx="${idx}" aria-label="Ver más sobre ${item.title}">Ver más</button>
+        <button class="card-btn" data-modal="programas" data-idx="${idx}" aria-label="Ver más sobre ${item.title}">Ver más</button>
       </div>
     </div>`;
 }
@@ -169,15 +189,18 @@ function podcastCard(item, idx) {
     </div>`;
 }
 
-// ---- Renderizado de tags/chips ----
+// -----------------------------
+// Renderizado de tags/chips
+// -----------------------------
 function renderTags(section, data) {
-  const tagsId = section.tagsId;
-  const container = document.getElementById(tagsId);
+  const container = document.getElementById(section.tagsId);
   if (!container) return;
+
   const allTags = [...new Set([].concat(...data.map(d => d.tags || [])))];
   container.innerHTML = allTags.map(tag =>
     `<button class="tag-chip${state.filters[section.key] === tag ? ' active' : ''}" data-tag="${tag}">${tag}</button>`
   ).join('');
+
   container.querySelectorAll('.tag-chip').forEach(btn => {
     btn.onclick = () => {
       const t = btn.getAttribute('data-tag');
@@ -187,15 +210,16 @@ function renderTags(section, data) {
   });
 }
 
-// ---- Controles de slider/carousel ----
+// -----------------------------
+// Controles de slider/carousel
+// -----------------------------
 function bindSliderControls(section, count) {
   const slider = document.getElementById(section.sliderId);
   if (!slider) return;
 
-  // Scroll snap + arrastre táctil nativo
-  // Botones ← →
   const prevBtn = document.querySelector(`[data-section="${section.key}"].slider-prev`);
   const nextBtn = document.querySelector(`[data-section="${section.key}"].slider-next`);
+
   let pageIdx = 0;
   function scrollToIdx(idx) {
     pageIdx = Math.max(0, Math.min(idx, count - 1));
@@ -203,11 +227,12 @@ function bindSliderControls(section, count) {
     if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'start' });
     updateDots();
   }
+
   if (prevBtn && nextBtn) {
     prevBtn.onclick = () => scrollToIdx(pageIdx - 1);
     nextBtn.onclick = () => scrollToIdx(pageIdx + 1);
   }
-  // Dots
+
   const dotsDiv = document.getElementById(section.dotsId);
   if (dotsDiv) {
     dotsDiv.innerHTML = '';
@@ -218,6 +243,7 @@ function bindSliderControls(section, count) {
       dot.onclick = () => scrollToIdx(Number(dot.getAttribute('data-idx')));
     });
   }
+
   function updateDots() {
     if (dotsDiv) {
       dotsDiv.querySelectorAll('.slider-dot').forEach((dot, i) => {
@@ -225,6 +251,7 @@ function bindSliderControls(section, count) {
       });
     }
   }
+
   // Actualiza dot en scroll manual
   slider.onscroll = () => {
     const scrollLeft = slider.scrollLeft;
@@ -235,24 +262,30 @@ function bindSliderControls(section, count) {
     pageIdx = idx;
     updateDots();
   };
+
   // Modal “Ver más”
   slider.querySelectorAll('.card-btn[data-modal]').forEach(btn => {
-    btn.onclick = (e) => openModal(section.key, Number(btn.getAttribute('data-idx')));
+    btn.onclick = () => openModal(section.key, Number(btn.getAttribute('data-idx')));
   });
 }
 
-// ---- Modales accesibles ----
+// -----------------------------
+// Modales accesibles
+// -----------------------------
 function openModal(sectionKey, idx) {
   const modalOverlay = document.getElementById('modalOverlay');
   const modalContent = document.getElementById('modalContent');
-  // Trap de foco y cierre con Esc
+
   state.modals.open = true;
   state.modals.lastFocus = document.activeElement;
+
   modalOverlay.classList.add('active');
   modalOverlay.tabIndex = -1;
   modalOverlay.focus();
-  let item = state.data[sectionKey][idx];
+
+  const item = state.data[sectionKey][idx];
   let html = '';
+
   if (sectionKey === 'arquitectura') {
     html = `
       <h4 class="text-xl font-bold mb-1">${item.title}</h4>
@@ -265,7 +298,8 @@ function openModal(sectionKey, idx) {
       ${item.pdf ? `<a href="${item.pdf}" class="card-btn" target="_blank" rel="noopener">Ficha PDF</a>` : ''}
     `;
   }
-  if (sectionKey === 'programacion') {
+
+  if (sectionKey === 'programas') { // <- antes 'programacion'
     html = `
       <h4 class="text-xl font-bold mb-1">${item.title}</h4>
       <div><b>Stack:</b> ${(item.stack || []).join(', ')}</div>
@@ -279,11 +313,34 @@ function openModal(sectionKey, idx) {
       </div>
     `;
   }
+
+  if (sectionKey === 'investigacion') {
+    html = `
+      <h4 class="text-xl font-bold mb-1">${item.title}</h4>
+      <div><b>Año:</b> ${item.year}</div>
+      <div class="mb-2">${item.summary}</div>
+      <div><b>Palabras clave:</b> ${(item.keywords || []).join(', ')}</div>
+      <div>
+        ${item.pdf ? `<a href="${item.pdf}" class="card-btn" target="_blank" rel="noopener">PDF</a>` : ''}
+        ${item.links?.doi ? `<a href="${item.links.doi}" class="card-btn" target="_blank" rel="noopener">DOI</a>` : ''}
+      </div>
+    `;
+  }
+
+  if (sectionKey === 'podcast') {
+    html = `
+      <h4 class="text-xl font-bold mb-1">${item.title}</h4>
+      <div>${item.date}</div>
+      <div class="mb-2">${item.description}</div>
+      ${item.spotifyUrl ? `<iframe src="https://open.spotify.com/embed/show/5YSuFM9SCpCaVzbWagmSqj" width="100%" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Spotify podcast"></iframe>` : ''}
+    `;
+  }
+
   modalContent.innerHTML = html;
   document.body.style.overflow = 'hidden';
-  // Trap de foco
   modalContent.focus();
 }
+
 // Cierre modal
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('active');
@@ -299,12 +356,16 @@ document.addEventListener('keydown', function (e) {
   if (state.modals.open && e.key === 'Escape') closeModal();
 });
 
-// ---- Botón scroll a primera sección ----
+// -----------------------------
+// Botón scroll a primera sección (Podcast)
+// -----------------------------
 document.getElementById('exploreBtn').onclick = function () {
-  document.getElementById('arquitectura').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('podcast').scrollIntoView({ behavior: 'smooth' });
 };
 
-// ---- Contacto: mailto ----
+// -----------------------------
+// Contacto: mailto
+// -----------------------------
 document.getElementById('contactForm').onsubmit = function (e) {
   e.preventDefault();
   const nombre = this.nombre.value.trim();
@@ -324,5 +385,7 @@ document.getElementById('contactForm').onsubmit = function (e) {
   this.reset();
 };
 
-// ---- Inicialización: Renderiza sliders ----
+// -----------------------------
+// Inicialización: Renderiza sliders
+// -----------------------------
 sections.forEach(renderSlider);
