@@ -1,0 +1,26 @@
+[
+  {
+    "id": "arq-001",
+    "title": "Vivienda Patio Luz",
+    "year": 2024,
+    "location": "Bogotá, Colombia",
+    "cover": "assets/placeholder.png",
+    "images": ["assets/placeholder.png"],
+    "tags": ["vivienda", "sostenibilidad", "bioclimática"],
+    "summary": "Prototipo de vivienda de bajo impacto con estrategias pasivas.",
+    "pdf": "assets/arquitectura/vivienda-patio/portfolio.pdf",
+    "roles": ["Diseño", "Coordinación"]
+  },
+  {
+    "id": "arq-002",
+    "title": "Centro Comunitario Modular",
+    "year": 2023,
+    "location": "Medellín, Colombia",
+    "cover": "assets/placeholder.png",
+    "images": ["assets/placeholder.png"],
+    "tags": ["comunidad", "modular", "prefabricado"],
+    "summary": "Espacios flexibles para actividades sociales y educativas.",
+    "pdf": "",
+    "roles": ["Diseño", "Supervisión"]
+  }
+]
