@@ -114,7 +114,7 @@ async function renderSlider(section) {
     items.forEach((item, idx) => {
       let cardHtml = '';
       if (section.key === 'arquitectura') cardHtml = arquitecturaCard(item, idx);
-      if (section.key === 'programas')     cardHtml = programacionCard(item, idx); // reutilizamos la tarjeta
+      if (section.key === 'programas')     cardHtml = programasCard(item, idx); // reutilizamos la tarjeta
       if (section.key === 'investigacion') cardHtml = investigacionCard(item, idx);
       if (section.key === 'podcast')       cardHtml = podcastCard(item, idx);
       slider.insertAdjacentHTML('beforeend', cardHtml);
@@ -142,7 +142,7 @@ function arquitecturaCard(item, idx) {
       </div>
     </div>`;
 }
-function programacionCard(item, idx) {
+function programasCard(item, idx) {
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
       <img src="${item.cover}" alt="Cover de ${item.title}" class="card-img">
