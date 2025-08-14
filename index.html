@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Portafolio — María José Duarte Torres</title>
+  <meta name="description" content="Portafolio profesional de María José Duarte Torres: Arquitecta, investigadora y programadora. Proyectos en arquitectura, código, investigación y podcast.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Portafolio — María José Duarte Torres">
+  <meta property="og:description" content="Arquitecta, investigadora y programadora. Proyectos destacados.">
+  <meta property="og:image" content="assets/placeholder.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://MariaJoseDuarte29.github.io/Portafolio-personal/">
+
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN (optional, can be disabled in styles.css) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50 transition-colors">
+    <span class="text-lg font-semibold text-gray-800 dark:text-gray-200" aria-live="polite">Cargando contenido…</span>
+  </div>
+  <!-- Hero Section -->
+  <header class="hero fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-30">
+    <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between py-4 px-6">
+      <div>
+        <h1 class="text-3xl font-bold mb-1 tracking-tight text-gray-900 dark:text-gray-100">María José Duarte Torres</h1>
+        <h2 class="text-lg text-gray-600 dark:text-gray-300">Arquitecta · Investigación · Código</h2>
+      </div>
+      <div class="flex items-center gap-4 mt-2 sm:mt-0">
+        <button id="exploreBtn" class="btn-primary" aria-label="Explorar portafolio">Explorar portafolio</button>
+        <button id="themeToggle" class="toggle-theme" aria-label="Cambiar modo claro/oscuro">
+          <span id="themeIcon">🌞</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main class="pt-32 pb-10 max-w-5xl mx-auto px-4">
+    <!-- Arquitectura -->
+    <section id="arquitectura" class="mb-16" aria-labelledby="arquitectura-title">
+      <h3 id="arquitectura-title" class="section-title">Arquitectura</h3>
+      <div id="arquitectura-tags" class="tags mb-4"></div>
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" data-section="arquitectura" aria-label="Anterior">←</button>
+        <div class="slider" id="slider-arquitectura" role="region" aria-label="Proyectos de arquitectura"></div>
+        <button class="slider-btn slider-next" data-section="arquitectura" aria-label="Siguiente">→</button>
+      </div>
+      <div class="slider-dots" id="dots-arquitectura"></div>
+    </section>
+    <!-- Programación -->
+    <section id="programacion" class="mb-16" aria-labelledby="programacion-title">
+      <h3 id="programacion-title" class="section-title">Programación</h3>
+      <div id="programacion-tags" class="tags mb-4"></div>
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" data-section="programacion" aria-label="Anterior">←</button>
+        <div class="slider" id="slider-programacion" role="region" aria-label="Proyectos de código"></div>
+        <button class="slider-btn slider-next" data-section="programacion" aria-label="Siguiente">→</button>
+      </div>
+      <div class="slider-dots" id="dots-programacion"></div>
+    </section>
+    <!-- Investigación -->
+    <section id="investigacion" class="mb-16" aria-labelledby="investigacion-title">
+      <h3 id="investigacion-title" class="section-title">Investigación</h3>
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" data-section="investigacion" aria-label="Anterior">←</button>
+        <div class="slider" id="slider-investigacion" role="region" aria-label="Investigaciones"></div>
+        <button class="slider-btn slider-next" data-section="investigacion" aria-label="Siguiente">→</button>
+      </div>
+      <div class="slider-dots" id="dots-investigacion"></div>
+    </section>
+    <!-- Podcast -->
+    <section id="podcast" class="mb-16" aria-labelledby="podcast-title">
+      <h3 id="podcast-title" class="section-title">Podcast</h3>
+      <div class="slider-wrapper">
+        <button class="slider-btn slider-prev" data-section="podcast" aria-label="Anterior">←</button>
+        <div class="slider" id="slider-podcast" role="region" aria-label="Podcast"></div>
+        <button class="slider-btn slider-next" data-section="podcast" aria-label="Siguiente">→</button>
+      </div>
+      <div class="slider-dots" id="dots-podcast"></div>
+    </section>
+    <!-- Contacto -->
+    <section id="contacto" class="mb-16" aria-labelledby="contacto-title">
+      <h3 id="contacto-title" class="section-title">Contacto</h3>
+      <form id="contactForm" class="contact-form" autocomplete="off" aria-label="Formulario de contacto" novalidate>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Enviar</button>
+        <div id="formStatus" class="form-status" aria-live="polite"></div>
+      </form>
+      <div class="quick-links mt-6 flex flex-col sm:flex-row gap-4">
+        <a href="mailto:dmajoto@gmail.com" class="quick-link" aria-label="Enviar correo">📧 Email</a>
+        <a href="https://www.linkedin.com/in/maria-jose-duarte-torres-arquitecta/" target="_blank" rel="noopener" class="quick-link" aria-label="LinkedIn">🔗 LinkedIn</a>
+        <a href="https://open.spotify.com/show/5YSuFM9SCpCaVzbWagmSqj" target="_blank" rel="noopener" class="quick-link" aria-label="Podcast Spotify">🎙️ Podcast</a>
+      </div>
+    </section>
+  </main>
+  <!-- Modal -->
+  <div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Detalles" tabindex="-1">
+    <div class="modal" id="modalContent" tabindex="0"></div>
+    <button class="modal-close" id="modalClose" aria-label="Cerrar modal">✖</button>
+  </div>
+  <!-- Footer -->
+  <footer class="footer bg-gray-50 dark:bg-gray-800 py-6 px-4 text-center">
+    <div class="mb-2">
+      &copy; <span id="year"></span> María José Duarte Torres
+    </div>
+    <div class="flex justify-center gap-6 mb-2">
+      <a href="mailto:dmajoto@gmail.com" aria-label="Correo" class="footer-link">Email</a>
+      <a href="https://www.linkedin.com/in/maria-jose-duarte-torres-arquitecta/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+      <a href="https://open.spotify.com/show/5YSuFM9SCpCaVzbWagmSqj" target="_blank" rel="noopener" class="footer-link">Podcast</a>
+      <a href="README.md" aria-label="Ver README" class="footer-link">README.md</a>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+  <script>
+    // Actualiza año en footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

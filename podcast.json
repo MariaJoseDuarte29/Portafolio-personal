@@ -1,0 +1,18 @@
+[
+  {
+    "id": "pod-001",
+    "title": "BIM & AI en AECO: desafíos reales",
+    "date": "2025-08-01",
+    "description": "Automatización y toma de decisiones en etapa temprana.",
+    "spotifyUrl": "https://open.spotify.com/show/5YSuFM9SCpCaVzbWagmSqj",
+    "tags": ["BIM", "IA", "ACV"]
+  },
+  {
+    "id": "pod-002",
+    "title": "Arquitectura modular y sostenibilidad",
+    "date": "2024-12-15",
+    "description": "Explorando el futuro de la construcción modular.",
+    "spotifyUrl": "",
+    "tags": ["Modular", "Sostenibilidad"]
+  }
+]
