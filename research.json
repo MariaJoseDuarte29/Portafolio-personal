@@ -3,18 +3,24 @@
     "id": "res-001",
     "title": "Modelo predictivo BIM–ACV en etapa temprana",
     "year": 2025,
-    "summary": "Estimación de GWP con ML para apoyar decisiones de diseño.",
+    "summary": "Estimación de GWP con Machine Learning para apoyar decisiones de diseño.",
     "pdf": "assets/research/modelo_predictivo.pdf",
-    "links": { "doi": "", "slides": "" },
+    "links": {
+      "doi": "",
+      "slides": ""
+    },
     "keywords": ["BIM", "ACV", "Machine Learning"]
   },
   {
     "id": "res-002",
-    "title": "Estrategias bioclimáticas en vivienda social",
-    "year": 2022,
-    "summary": "Análisis de eficiencia energética en contextos urbanos latinoamericanos.",
+    "title": "Flujo de información para LCA en entornos BIM",
+    "year": 2024,
+    "summary": "Estandarización de datos y trazabilidad en proyectos comerciales.",
     "pdf": "",
-    "links": { "doi": "", "slides": "" },
-    "keywords": ["Eficiencia", "Bioclimática", "Vivienda"]
+    "links": {
+      "doi": "",
+      "slides": ""
+    },
+    "keywords": ["BIM", "Datos", "Interoperabilidad"]
   }
 ]
