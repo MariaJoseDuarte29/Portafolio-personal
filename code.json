@@ -1,22 +1,28 @@
 [
   {
     "id": "code-001",
-    "title": "SYNAXIS — plugin BIM–LCA",
+    "title": "SYNAXIS — Plugin BIM–LCA",
     "stack": ["Python", "Dynamo", "Revit API"],
     "cover": "assets/placeholder.png",
     "images": ["assets/placeholder.png"],
-    "links": { "github": "#", "demo": "#" },
+    "links": {
+      "github": "#",
+      "demo": "#"
+    },
     "summary": "Automatiza la asignación de impactos ambientales a familias Revit.",
     "tags": ["BIM", "LCA", "Automatización"]
   },
   {
     "id": "code-002",
-    "title": "GeoTagger",
-    "stack": ["JavaScript", "Leaflet", "Mapbox"],
+    "title": "EcoApp — Calculadora de GWP",
+    "stack": ["JavaScript", "Web"],
     "cover": "assets/placeholder.png",
     "images": ["assets/placeholder.png"],
-    "links": { "github": "#", "demo": "#" },
-    "summary": "Visualización interactiva de proyectos arquitectónicos geolocalizados.",
-    "tags": ["GIS", "Visualización"]
+    "links": {
+      "github": "#",
+      "demo": "#"
+    },
+    "summary": "App web para estimar huella de carbono en diseño temprano.",
+    "tags": ["Web", "Sostenibilidad"]
   }
 ]
