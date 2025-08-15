@@ -10,8 +10,8 @@ const sections = [
     json: 'content/podcast.json',
     sliderId: 'slider-podcast',
     dotsId: 'dots-podcast',
-    tagsId: 'podcast-tags',     // <- filtros visibles en Podcast
-    filterable: true,           // <- habilitado
+    tagsId: 'podcast-tags',     // filtros visibles en Podcast
+    filterable: true,
   },
   {
     key: 'arquitectura',
@@ -43,7 +43,7 @@ const sections = [
 // -----------------------------
 const state = {
   data: {},
-  filters: { arquitectura: null, programas: null, podcast: null }, // <- agregado podcast
+  filters: { arquitectura: null, programas: null, podcast: null }, // agregado podcast
   modals: { open: false, lastFocus: null }
 };
 
@@ -87,7 +87,7 @@ function spotifyEmbedFrom(url) {
   return null;
 }
 function cleanText(t = '') {
-  // quita citas/copypaste tipo 【...】 y espacios extra
+  // Quita citas/copypaste tipo 【...】 y espacios extra
   return t.replace(/【[^】]*】/g, '').replace(/\s+/g, ' ').trim();
 }
 function truncate(t = '', n = 200) {
@@ -239,18 +239,31 @@ function bindSliderControls(section, count) {
   const nextBtn = document.querySelector(`[data-section="${section.key}"].slider-next`);
 
   let pageIdx = 0;
+
+  function updateDots() {
+    const dotsDiv = document.getElementById(section.dotsId);
+    if (!dotsDiv) return;
+    dotsDiv.querySelectorAll('.slider-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === pageIdx);
+    });
+  }
+
   function scrollToIdx(idx) {
     pageIdx = Math.max(0, Math.min(idx, count - 1));
     const card = slider.children[pageIdx];
-    if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+    if (card) {
+      const targetLeft = card.offsetLeft - slider.offsetLeft;
+      slider.scrollTo({ left: targetLeft, behavior: 'smooth' }); // solo eje X, evita salto vertical
+    }
     updateDots();
   }
 
   if (prevBtn && nextBtn) {
-    prevBtn.onclick = () => scrollToIdx(pageIdx - 1);
-    nextBtn.onclick = () => scrollToIdx(pageIdx + 1);
+    prevBtn.onclick = (e) => { e.preventDefault(); scrollToIdx(pageIdx - 1); };
+    nextBtn.onclick = (e) => { e.preventDefault(); scrollToIdx(pageIdx + 1); };
   }
 
+  // Dots
   const dotsDiv = document.getElementById(section.dotsId);
   if (dotsDiv) {
     dotsDiv.innerHTML = '';
@@ -258,16 +271,11 @@ function bindSliderControls(section, count) {
       dotsDiv.innerHTML += `<button class="slider-dot${i === pageIdx ? ' active' : ''}" data-idx="${i}" aria-label="Ir a tarjeta ${i+1}"></button>`;
     }
     dotsDiv.querySelectorAll('.slider-dot').forEach(dot => {
-      dot.onclick = () => scrollToIdx(Number(dot.getAttribute('data-idx')));
+      dot.onclick = (e) => {
+        e.preventDefault();
+        scrollToIdx(Number(dot.getAttribute('data-idx')));
+      };
     });
-  }
-
-  function updateDots() {
-    if (dotsDiv) {
-      dotsDiv.querySelectorAll('.slider-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === pageIdx);
-      });
-    }
   }
 
   // Actualiza dot en scroll manual
@@ -281,7 +289,7 @@ function bindSliderControls(section, count) {
     updateDots();
   };
 
-  // Modal “Ver más”
+  // Modal “Saber más”
   slider.querySelectorAll('.card-btn[data-modal]').forEach(btn => {
     btn.onclick = () => openModal(section.key, Number(btn.getAttribute('data-idx')));
   });
@@ -408,3 +416,4 @@ document.getElementById('contactForm').onsubmit = function (e) {
 // Inicialización: Renderiza sliders
 // -----------------------------
 sections.forEach(renderSlider);
+
