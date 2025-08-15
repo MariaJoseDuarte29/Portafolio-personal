@@ -149,25 +149,29 @@ async function renderSlider(section) {
   bindSliderControls(section, items.length);
   if (section.filterable) renderTags(section, data);
 
-  // Igualar alturas de tarjetas (después de pintar)
+  // Igualar alturas
   setTimeout(() => equalizeHeights(section), 0);
 
   showLoader(false);
 }
 
 // -----------------------------
-// Tarjetas
+// Tarjetas (card-body con flex column; card-bottom al fondo)
 // -----------------------------
 function arquitecturaCard(item, idx) {
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
       <img src="${item.cover}" alt="Cover de ${item.title}" class="card-img">
-      <div class="card-body">
-        <div class="card-title">${item.title}</div>
-        <div class="card-meta">${item.location}, ${item.year}</div>
-        <div class="card-tags">${(item.tags||[]).map(t=>`<button class="card-tag" tabindex="-1">${t}</button>`).join('')}</div>
-        <div class="card-summary">${item.summary}</div>
-        <button class="card-btn" data-modal="arquitectura" data-idx="${idx}" aria-label="Ver más sobre ${item.title}">Ver más</button>
+      <div class="card-body" style="display:flex;flex-direction:column;height:100%;">
+        <div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-meta">${item.location}, ${item.year}</div>
+          <div class="card-tags">${(item.tags||[]).map(t=>`<button class="card-tag" tabindex="-1">${t}</button>`).join('')}</div>
+          <div class="card-summary">${item.summary}</div>
+        </div>
+        <div class="card-bottom" style="margin-top:auto;">
+          <button class="card-btn" data-modal="arquitectura" data-idx="${idx}" aria-label="Ver más sobre ${item.title}">Ver más</button>
+        </div>
       </div>
     </div>`;
 }
@@ -175,63 +179,69 @@ function programasCard(item, idx) {
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
       <img src="${item.cover}" alt="Cover de ${item.title}" class="card-img">
-      <div class="card-body">
-        <div class="card-title">${item.title}</div>
-        <div class="card-meta">${(item.stack||[]).join(', ')}</div>
-        <div class="card-tags">${(item.tags||[]).map(t=>`<button class="card-tag" tabindex="-1">${t}</button>`).join('')}</div>
-        <div class="card-summary">${item.summary}</div>
+      <div class="card-body" style="display:flex;flex-direction:column;height:100%;">
         <div>
-          ${item.links?.github ? `<a href="${item.links.github}" class="card-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
-          ${item.links?.demo ? `<a href="${item.links.demo}" class="card-btn" target="_blank" rel="noopener">Demo</a>` : ''}
+          <div class="card-title">${item.title}</div>
+          <div class="card-meta">${(item.stack||[]).join(', ')}</div>
+          <div class="card-tags">${(item.tags||[]).map(t=>`<button class="card-tag" tabindex="-1">${t}</button>`).join('')}</div>
+          <div class="card-summary">${item.summary}</div>
         </div>
-        <button class="card-btn" data-modal="programas" data-idx="${idx}" aria-label="Ver más sobre ${item.title}">Ver más</button>
+        <div class="card-bottom" style="margin-top:auto;">
+          <div>
+            ${item.links?.github ? `<a href="${item.links.github}" class="card-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
+            ${item.links?.demo ? `<a href="${item.links.demo}" class="card-btn" target="_blank" rel="noopener">Demo</a>` : ''}
+          </div>
+          <button class="card-btn" data-modal="programas" data-idx="${idx}" aria-label="Ver más sobre ${item.title}">Ver más</button>
+        </div>
       </div>
     </div>`;
 }
 function investigacionCard(item, idx) {
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
-      <div class="card-body">
-        <div class="card-title">${item.title}</div>
-        <div class="card-meta">${item.year}</div>
-        <div class="card-tags">${(item.keywords||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-        <div class="card-summary">${item.summary}</div>
+      <div class="card-body" style="display:flex;flex-direction:column;height:100%;">
         <div>
-          ${item.pdf ? `<a href="${item.pdf}" class="card-btn" target="_blank" rel="noopener">PDF</a>` : ''}
-          ${item.links?.doi ? `<a href="${item.links.doi}" class="card-btn" target="_blank" rel="noopener">DOI</a>` : ''}
+          <div class="card-title">${item.title}</div>
+          <div class="card-meta">${item.year}</div>
+          <div class="card-tags">${(item.keywords||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
+          <div class="card-summary">${item.summary}</div>
+        </div>
+        <div class="card-bottom" style="margin-top:auto;">
+          <div>
+            ${item.pdf ? `<a href="${item.pdf}" class="card-btn" target="_blank" rel="noopener">PDF</a>` : ''}
+            ${item.links?.doi ? `<a href="${item.links.doi}" class="card-btn" target="_blank" rel="noopener">DOI</a>` : ''}
+          </div>
         </div>
       </div>
     </div>`;
 }
 function podcastCard(item, idx) {
-  // Botón "Saber más" y mini-embed DEBAJO. Altura consistente mediante equalizeHeights().
   const embed = spotifyEmbedFrom(item.spotifyUrl);
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
-      <div class="card-body">
-        <div class="card-title">${item.title}</div>
-        <div class="card-meta">${item.date || ''}</div>
-        <div class="card-tags">${(item.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-
-        <button class="card-btn mt-3" data-modal="podcast" data-idx="${idx}"
-          aria-label="Saber más sobre ${item.title}">
-          Saber más
-        </button>
-
-        ${embed ? `
-          <div class="mt-3">
-            <iframe
-              src="${embed}"
-              width="100%"
-              height="80"
-              frameborder="0"
-              loading="lazy"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              title="Spotify"
-              style="border-radius: 0.75rem;"
-            ></iframe>
-          </div>
-        ` : ''}
+      <div class="card-body" style="display:flex;flex-direction:column;height:100%;">
+        <div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-meta">${item.date || ''}</div>
+          <div class="card-tags">${(item.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="card-bottom" style="margin-top:auto;">
+          <button class="card-btn mt-3" data-modal="podcast" data-idx="${idx}" aria-label="Saber más sobre ${item.title}">Saber más</button>
+          ${embed ? `
+            <div class="mt-3">
+              <iframe
+                src="${embed}"
+                width="100%"
+                height="80"
+                frameborder="0"
+                loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                title="Spotify"
+                style="border-radius:0.75rem;"
+              ></iframe>
+            </div>
+          ` : ''}
+        </div>
       </div>
     </div>`;
 }
@@ -282,7 +292,7 @@ function bindSliderControls(section, count) {
     const card = slider.children[pageIdx];
     if (card) {
       const targetLeft = card.offsetLeft - slider.offsetLeft;
-      slider.scrollTo({ left: targetLeft, behavior: 'smooth' }); // solo X, evita salto vertical
+      slider.scrollTo({ left: targetLeft, behavior: 'smooth' }); // solo X
     }
     updateDots();
   }
