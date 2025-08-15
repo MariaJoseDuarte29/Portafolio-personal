@@ -75,6 +75,25 @@ document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 })();
 
 // -----------------------------
+// Helpers
+// -----------------------------
+function spotifyEmbedFrom(url) {
+  if (!url) return null;
+  const ep = url.match(/open\.spotify\.com\/episode\/([A-Za-z0-9]+)/);
+  if (ep) return `https://open.spotify.com/embed/episode/${ep[1]}`;
+  const show = url.match(/open\.spotify\.com\/show\/([A-Za-z0-9]+)/);
+  if (show) return `https://open.spotify.com/embed/show/${show[1]}`;
+  return null;
+}
+function cleanText(t = '') {
+  // quita citas/copypaste tipo 【...】 y espacios extra
+  return t.replace(/【[^】]*】/g, '').replace(/\s+/g, ' ').trim();
+}
+function truncate(t = '', n = 200) {
+  return t.length > n ? t.slice(0, n - 1) + '…' : t;
+}
+
+// -----------------------------
 // Carga de datos JSON
 // -----------------------------
 async function loadJSON(url) {
@@ -114,7 +133,7 @@ async function renderSlider(section) {
     items.forEach((item, idx) => {
       let cardHtml = '';
       if (section.key === 'arquitectura') cardHtml = arquitecturaCard(item, idx);
-      if (section.key === 'programas')     cardHtml = programasCard(item, idx); // reutilizamos la tarjeta
+      if (section.key === 'programas')     cardHtml = programasCard(item, idx);
       if (section.key === 'investigacion') cardHtml = investigacionCard(item, idx);
       if (section.key === 'podcast')       cardHtml = podcastCard(item, idx);
       slider.insertAdjacentHTML('beforeend', cardHtml);
@@ -175,16 +194,16 @@ function investigacionCard(item, idx) {
     </div>`;
 }
 function podcastCard(item, idx) {
+  const embed = spotifyEmbedFrom(item.spotifyUrl);
+  const desc  = truncate(cleanText(item.description || ''), 200); // corto en tarjeta
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
       <div class="card-body">
         <div class="card-title">${item.title}</div>
-        <div class="card-meta">${item.date}</div>
+        <div class="card-meta">${item.date || ''}</div>
         <div class="card-tags">${(item.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-        <div class="card-summary">${item.description}</div>
-        <div>
-          ${item.spotifyUrl ? `<iframe src="https://open.spotify.com/embed/show/5YSuFM9SCpCaVzbWagmSqj" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Spotify podcast"></iframe>` : ''}
-        </div>
+        <div class="card-summary">${desc}</div>
+        ${embed ? `<iframe src="${embed}" width="100%" height="152" frameborder="0" allow="encrypted-media" title="Spotify"></iframe>` : ''}
       </div>
     </div>`;
 }
@@ -328,11 +347,12 @@ function openModal(sectionKey, idx) {
   }
 
   if (sectionKey === 'podcast') {
+    const embed = spotifyEmbedFrom(item.spotifyUrl);
     html = `
       <h4 class="text-xl font-bold mb-1">${item.title}</h4>
-      <div>${item.date}</div>
-      <div class="mb-2">${item.description}</div>
-      ${item.spotifyUrl ? `<iframe src="https://open.spotify.com/embed/show/5YSuFM9SCpCaVzbWagmSqj" width="100%" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media" title="Spotify podcast"></iframe>` : ''}
+      <div>${item.date || ''}</div>
+      <div class="mb-2">${cleanText(item.description || '')}</div>
+      ${embed ? `<iframe src="${embed}" width="100%" height="232" frameborder="0" allow="encrypted-media" title="Spotify"></iframe>` : ''}
     `;
   }
 
