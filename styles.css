@@ -26,19 +26,23 @@ html.dark {
   --c-shadow: rgba(0,0,0,0.15);
   --c-border: #2d3748;
 }
+
 a { color: var(--c-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
 .hero {
   background: var(--c-bg);
   border-bottom: 1px solid var(--c-border);
   box-shadow: 0 2px 10px var(--c-shadow);
 }
+
 .section-title {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5em;
   color: var(--c-primary);
 }
+
 .btn-primary {
   background: var(--c-primary);
   color: #fff;
@@ -55,6 +59,7 @@ a:hover { text-decoration: underline; }
   background: #174ea6;
   outline: 2px solid var(--c-primary);
 }
+
 .toggle-theme {
   background: var(--c-card);
   border: 1px solid var(--c-border);
@@ -71,6 +76,7 @@ a:hover { text-decoration: underline; }
 }
 .toggle-theme:focus-visible { outline: 2px solid var(--c-primary); }
 
+/* Slider */
 .slider-wrapper {
   position: relative;
   display: flex;
@@ -121,6 +127,7 @@ a:hover { text-decoration: underline; }
 }
 .slider-dot.active { background: var(--c-primary); }
 
+/* Cards */
 .card {
   background: var(--c-card);
   border-radius: 1em;
@@ -173,6 +180,7 @@ a:hover { text-decoration: underline; }
 .card-btn:hover,
 .card-btn:focus-visible { background: #174ea6; outline: 2px solid var(--c-primary); }
 
+/* Filtros (chips) */
 .tags {
   display: flex;
   gap: 0.4em;
@@ -192,6 +200,7 @@ a:hover { text-decoration: underline; }
 }
 .tag-chip.active { background: var(--c-primary); color: #fff; }
 
+/* Formularios */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -218,6 +227,8 @@ input:focus-visible, textarea:focus-visible {
   color: var(--c-primary);
   min-height: 1.2em;
 }
+
+/* Enlaces rápidos */
 .quick-links { gap: 1.2em; }
 .quick-link {
   display: inline-block;
@@ -230,6 +241,7 @@ input:focus-visible, textarea:focus-visible {
 }
 .quick-link:hover { background: var(--c-primary); color: #fff; }
 
+/* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -240,16 +252,40 @@ input:focus-visible, textarea:focus-visible {
   z-index: 100;
 }
 .modal-overlay.active { display: flex; }
+
+/* Modal más ancho y alto cómodo */
 .modal {
   background: var(--c-card);
   border-radius: 1em;
   box-shadow: 0 6px 32px rgba(0,0,0,0.2);
   padding: 2em 1.5em 1em 1.5em;
-  max-width: 500px;
-  width: 100%;
+  width: min(92vw, 1280px);   /* <— ancho máximo del modal */
+  max-height: 88vh;
+  overflow: auto;
   position: relative;
   outline: none;
 }
+
+/* Grid de contenido del modal (texto | PDF) */
+.modal-content-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(320px, 1fr) minmax(520px, 1.15fr);
+}
+
+/* Pane del PDF */
+.pdf-pane {
+  background: #1118270d;             /* sutil */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 8px rgba(0,0,0,.06);
+}
+.pdf-pane iframe {
+  width: 100%;
+  height: 76vh;                       /* visor alto para lectura */
+  border: 0;
+}
+
 .modal-close {
   position: absolute;
   top: 1.1em;
@@ -264,6 +300,7 @@ input:focus-visible, textarea:focus-visible {
 }
 .modal-close:focus-visible { outline: 2px solid var(--c-primary); }
 
+/* Footer */
 .footer {
   border-top: 1px solid var(--c-border);
   color: var(--c-text);
@@ -276,6 +313,7 @@ input:focus-visible, textarea:focus-visible {
 }
 .footer-link:hover { color: #174ea6; }
 
+/* Loader */
 #loader {
   display: none;
   background: var(--c-bg);
@@ -286,9 +324,17 @@ input:focus-visible, textarea:focus-visible {
 #loader.active { display: flex; }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .modal-content-grid { grid-template-columns: 1fr; }
+  .pdf-pane iframe { height: 60vh; }
+}
+
 @media (max-width: 600px) {
   .card { min-width: 85vw; max-width: 95vw; }
   main, .container { padding-left: 0.2em; padding-right: 0.2em; }
   .slider { min-height: 210px; }
-  .modal { max-width: 99vw; padding: 1em 0.5em 0.5em 0.5em; }
+  .modal {
+    width: 98vw;
+    padding: 1em 0.75em 0.75em 0.75em;
+  }
 }
