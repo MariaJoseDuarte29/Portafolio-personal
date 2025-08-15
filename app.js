@@ -98,6 +98,26 @@ function throttle(fn, wait = 150) {
     if (now - t > wait) { t = now; fn(...args); }
   };
 }
+// Visor PDF embebido
+function pdfEmbed(url, height = 520) {
+  if (!url) return '';
+  const safe = encodeURI(url);
+  const withOpts = `${safe}#view=FitH&zoom=page-width&navpanes=0&toolbar=1&scrollbar=1`;
+  return `
+    <div class="pdf-wrapper" style="margin-top:12px;">
+      <iframe
+        src="${withOpts}"
+        title="Ficha PDF"
+        style="width:100%;height:${height}px;border:0;border-radius:.75rem;box-shadow:0 2px 10px rgba(0,0,0,.06);"
+        loading="lazy"
+      ></iframe>
+      <div style="display:flex;gap:.5rem;margin-top:.5rem;">
+        <a href="${safe}" target="_blank" rel="noopener" class="card-btn">Abrir en pestaña</a>
+        <a href="${safe}" download class="card-btn">Descargar PDF</a>
+      </div>
+    </div>
+  `;
+}
 
 // -----------------------------
 // Carga de datos JSON
@@ -381,9 +401,18 @@ function openModal(sectionKey, idx) {
       <div class="mb-2">${item.summary}</div>
       <div><b>Tags:</b> ${(item.tags || []).join(', ')}</div>
       <div><b>Roles:</b> ${(item.roles || []).join(', ')}</div>
-      <div class="mb-2"><b>Imágenes:</b></div>
-      <div class="flex gap-2 mb-2">${(item.images||[]).map(img=>`<img src="${img}" alt="Imagen ${item.title}" style="width:90px;height:90px;object-fit:cover;border-radius:0.6em;">`).join('')}</div>
-      ${item.pdf ? `<a href="${item.pdf}" class="card-btn" target="_blank" rel="noopener">Ficha PDF</a>` : ''}
+
+      ${(item.images && item.images.length)
+        ? `
+          <div class="mb-2"><b>Imágenes:</b></div>
+          <div class="flex gap-2 mb-2" style="flex-wrap:wrap">
+            ${item.images.map(img=>`<img src="${img}" alt="Imagen ${item.title}" style="width:90px;height:90px;object-fit:cover;border-radius:0.6em;">`).join('')}
+          </div>
+        `
+        : ''
+      }
+
+      ${item.pdf ? pdfEmbed(item.pdf, 520) : ''}
     `;
   }
 
@@ -394,7 +423,9 @@ function openModal(sectionKey, idx) {
       <div class="mb-2">${item.summary}</div>
       <div><b>Tags:</b> ${(item.tags || []).join(', ')}</div>
       <div class="mb-2"><b>Imágenes:</b></div>
-      <div class="flex gap-2 mb-2">${(item.images||[]).map(img=>`<img src="${img}" alt="Imagen ${item.title}" style="width:90px;height:90px;object-fit:cover;border-radius:0.6em;">`).join('')}</div>
+      <div class="flex gap-2 mb-2" style="flex-wrap:wrap">
+        ${(item.images||[]).map(img=>`<img src="${img}" alt="Imagen ${item.title}" style="width:90px;height:90px;object-fit:cover;border-radius:0.6em;">`).join('')}
+      </div>
       <div>
         ${item.links?.github ? `<a href="${item.links.github}" class="card-btn" target="_blank" rel="noopener">GitHub</a>` : ''}
         ${item.links?.demo ? `<a href="${item.links.demo}" class="card-btn" target="_blank" rel="noopener">Demo</a>` : ''}
