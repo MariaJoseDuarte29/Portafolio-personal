@@ -5,15 +5,15 @@
     "date": "2025-08-05",
     "description": "Cómo la combinación de BIM e IA transforma el diseño y operación en arquitectura, ingeniería y construcción, mejorando eficiencia, colaboración y sostenibilidad.",
     "spotifyUrl": "https://open.spotify.com/episode/5NBwAMQIW7NwsZ5ne7urcn",
-    "tags": ["BIM", "IA", "Construcción", "Innovación"]
+    "tags": ["BIM", "IA", "Innovación"]
   },
   {
     "id": "pod-002",
-    "title": "La ciencia del balance: Rocking, Outriggers y el CORW resiliente",
+    "title": "La ciencia del balance: Rocking Outriggers y el CORW resiliente",
     "date": "2025-07-09",
     "description": "Sistema CORW: muro de balanceo controlado y outriggers amortiguadas para disipar energía sísmica con mínima afectación estructural.",
     "spotifyUrl": "https://open.spotify.com/episode/3anQ5KZZY9IVjDqXGoWvrh",
-    "tags": ["Sismo", "Resiliencia", "Rocking", "Outriggers"]
+    "tags": ["Sismo", "Resiliencia", "Innovación"]
   },
   {
     "id": "pod-003",
@@ -21,15 +21,15 @@
     "date": "2025-07-01",
     "description": "Análisis del colapso progresivo en estructuras prefabricadas de hormigón con conexiones secas y húmedas, evaluando su resistencia y capacidad de carga.",
     "spotifyUrl": "https://open.spotify.com/episode/2UZocchJtGJzq2MwFyeYBn",
-    "tags": ["Colapso Progresivo", "Conexiones", "Hormigón Prefabricado"]
+    "tags": ["Prefabricados", "Sismo", "Resiliencia"]
   },
   {
     "id": "pod-004",
-    "title": "Una nueva era para la Resiliencia Sísmica con materiales ligeros",
-    "date": "2025-06-20",
-    "description": "Estructuras con madera laminada, reciclados y concretos ligeros para mejorar desempeño sísmico y reducir fragilidad.",
+    "title": "Una nueva alternativa para la Resiliencia Sísmica: El potencial de materiales ligeros",
+    "date": "2025-06-25",
+    "description": "Estructuras con madera laminada, plásticos reciclados y concretos ligeros para mejorar desempeño sísmico y reducir fragilidad.",
     "spotifyUrl": "https://open.spotify.com/episode/6iuQJwW0EWiNfLQVopwtCb",
-    "tags": ["Resiliencia", "Materiales Ligeros", "Madera"]
+    "tags": ["Resiliencia", "Materiales", "Sismo"]
   },
   {
     "id": "pod-005",
@@ -37,54 +37,55 @@
     "date": "2025-06-17",
     "description": "Avances en control sísmico y durabilidad de puentes para minimizar daños y prolongar su vida útil.",
     "spotifyUrl": "https://open.spotify.com/episode/5Ms7DaCQxM7cVbaVPT2OHB",
-    "tags": ["Polímero reforzado", "Sismo", "Durabilidad"]
+    "tags": ["Infraestructura", "Materiales", "Sismo"]
   },
   {
     "id": "pod-006",
-    "title": "Ingeniería paramétrica en estructuras complejas",
-    "date": "2025-05-15",
-    "description": "Uso de modelado paramétrico para optimizar diseño estructural y construcción de formas complejas.",
+    "title": "Norma NSR-10 Capítulo K: La Seguridad en tu Edificio",
+    "date": "2025-06-13",
+    "description": "Lineamientos y requisitos del capítulo K de la NSR-10 para garantizar la seguridad en edificaciones.",
     "spotifyUrl": "https://open.spotify.com/episode/0R3xfM1GA3g0bUt51zaZ41",
-    "tags": ["Paramétrico", "Optimización", "Diseño"]
+    "tags": ["Normas", "Seguridad", "Construcción"]
   },
   {
     "id": "pod-007",
-    "title": "Norma NSR-10 Capítulo K: La Seguridad en tu Edificio",
-    "date": "2025-06-013",
-    "description": "Estrategias de eficiencia energética y control inteligente para reducir consumo y emisiones.",
+    "title": "Más Rápido, pero ¿Seguro? Comportamiento Sísmico de Estructuras Modulares de Acero",
+    "date": "2025-06-10",
+    "description": "Modelos predictivos y monitoreo para anticipar y mitigar riesgos sísmicos en estructuras modulares de acero.",
     "spotifyUrl": "https://open.spotify.com/episode/1LiyRbuUitf14aQDLZQxrb",
-    "tags": ["Titulo k", "Seguridad", "especificaciones"]
+    "tags": ["Sismo", "Infraestructura", "Resiliencia"]
   },
   {
     "id": "pod-008",
-    "title": "Más Rápido, pero ¿Seguro? Comportamiento Sísmico de Estructuras Modulares de Acero",
-    "date": "2025-04-15",
-    "description": "Modelos predictivos y monitoreo para anticipar y mitigar riesgos sísmicos en infraestructura.",
+    "title": "Lifeshell: Diseño protector en el mobiliario articulando confort, funcionalidad y seguridad del habitar",
+    "date": "2025-06-02",
+    "description": "Integración de diseño ergonómico, protección y estética en mobiliario para mejorar la seguridad y confort del usuario.",
     "spotifyUrl": "https://open.spotify.com/episode/7MhgwHpZ8gltuE9ivY54Nm",
-    "tags": ["Sismo", "Monitoreo", "Acero"]
+    "tags": ["Diseño", "Seguridad", "Innovación"]
   },
   {
     "id": "pod-009",
-    "title": "Diseño protector en el mobiliario articulando confort, funcionalidad y seguridad del habitar",
-    "date": "2025-04-01",
-    "description": "Arquitectura modular como estrategia para construcción rápida y resiliente.",
+    "title": "Evaluación sísmica de sistemas prefabricados: Comportamiento de muros UPPCW y conexiones de paneles",
+    "date": "2025-05-28",
+    "description": "Evaluación de la respuesta sísmica en muros UPPCW y conexiones de paneles de concreto reforzado.",
     "spotifyUrl": "https://open.spotify.com/episode/25K8x35Q9O4NzEbEM50aae",
-    "tags": ["Modular", "Resiliencia", "Mobiliario"]
+    "tags": ["Prefabricados", "Sismo", "Infraestructura"]
   },
   {
     "id": "pod-010",
-    "title": "Comportamiento de muros UPPCW y conexiones de paneles en edificaciones de concreto reforzado",
-    "date": "2025-03-27",
-    "description": "Evaluación y predicción de vida útil en puentes y edificios clave.",
+    "title": "Retrofit al Descubierto: Clasificación del Refuerzo Sísmico Sostenible",
+    "date": "2025-05-20",
+    "description": "Estrategias y clasificación de técnicas de refuerzo sísmico con un enfoque en sostenibilidad y eficiencia estructural.",
     "spotifyUrl": "https://open.spotify.com/episode/3NRslg6MYFvufW7D3vVS1Q",
-    "tags": ["Prefabricados", "Infraestructura", "Mantenimiento"]
+    "tags": ["Resiliencia", "Sismo", "Innovación"]
   },
   {
     "id": "pod-011",
     "title": "Amígdala, Hipocampo y ¡Acción!: Neuroaprendizaje del Acto Motor",
-    "date": "2025-03-01",
-    "description": "Este trabajo de investigación propone una estrategia de neuroaprendizaje... diseñada para mejorar la comprensión del concepto del acto motor en estudiantes universitarios del área de neurorrehabilitación.... ",
+    "date": "2025-05-17",
+    "description": "Propuesta de estrategia de neuroaprendizaje para mejorar la comprensión del acto motor en estudiantes universitarios de neurorrehabilitación.",
     "spotifyUrl": "https://open.spotify.com/episode/3jtRgHxuD8sljn1Ax4v2Dz",
-    "tags": ["Cerebro", "rendimiento académico", "acto motor"]
+    "tags": ["Innovación", "Diseño", "Educación"]
   }
 ]
+
