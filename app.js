@@ -10,7 +10,8 @@ const sections = [
     json: 'content/podcast.json',
     sliderId: 'slider-podcast',
     dotsId: 'dots-podcast',
-    filterable: false,
+    tagsId: 'podcast-tags',     // <- filtros visibles en Podcast
+    filterable: true,           // <- habilitado
   },
   {
     key: 'arquitectura',
@@ -30,9 +31,9 @@ const sections = [
   {
     key: 'programas', // <- antes 'programacion'
     json: 'content/code.json',
-    sliderId: 'slider-programas',   // <- antes 'slider-programacion'
-    dotsId: 'dots-programas',       // <- antes 'dots-programacion'
-    tagsId: 'programas-tags',       // <- antes 'programacion-tags'
+    sliderId: 'slider-programas',
+    dotsId: 'dots-programas',
+    tagsId: 'programas-tags',
     filterable: true,
   },
 ];
@@ -42,7 +43,7 @@ const sections = [
 // -----------------------------
 const state = {
   data: {},
-  filters: { arquitectura: null, programas: null }, // <- antes 'programacion'
+  filters: { arquitectura: null, programas: null, podcast: null }, // <- agregado podcast
   modals: { open: false, lastFocus: null }
 };
 
@@ -194,16 +195,14 @@ function investigacionCard(item, idx) {
     </div>`;
 }
 function podcastCard(item, idx) {
-  const embed = spotifyEmbedFrom(item.spotifyUrl);
-  const desc  = truncate(cleanText(item.description || ''), 200); // corto en tarjeta
+  // Tarjeta compacta: sin embed ni descripción larga; botón "Saber más"
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
       <div class="card-body">
         <div class="card-title">${item.title}</div>
         <div class="card-meta">${item.date || ''}</div>
         <div class="card-tags">${(item.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-        <div class="card-summary">${desc}</div>
-        ${embed ? `<iframe src="${embed}" width="100%" height="152" frameborder="0" allow="encrypted-media" title="Spotify"></iframe>` : ''}
+        <button class="card-btn" data-modal="podcast" data-idx="${idx}" aria-label="Saber más sobre ${item.title}">Saber más</button>
       </div>
     </div>`;
 }
@@ -318,7 +317,7 @@ function openModal(sectionKey, idx) {
     `;
   }
 
-  if (sectionKey === 'programas') { // <- antes 'programacion'
+  if (sectionKey === 'programas') {
     html = `
       <h4 class="text-xl font-bold mb-1">${item.title}</h4>
       <div><b>Stack:</b> ${(item.stack || []).join(', ')}</div>
