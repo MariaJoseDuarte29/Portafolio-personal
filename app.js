@@ -1,5 +1,5 @@
 // app.js — Portafolio María José Duarte Torres
-// Funciones principales: loadJSON, renderSlider, bindSliderControls, openModal, applyFilters
+// Funciones: loadJSON, renderSlider, bindSliderControls, openModal, equalizeHeights
 
 // -----------------------------
 // Config global de secciones (nuevo orden)
@@ -10,7 +10,7 @@ const sections = [
     json: 'content/podcast.json',
     sliderId: 'slider-podcast',
     dotsId: 'dots-podcast',
-    tagsId: 'podcast-tags',     // filtros visibles en Podcast
+    tagsId: 'podcast-tags', // filtros visibles en Podcast
     filterable: true,
   },
   {
@@ -29,7 +29,7 @@ const sections = [
     filterable: false,
   },
   {
-    key: 'programas', // <- antes 'programacion'
+    key: 'programas',
     json: 'content/code.json',
     sliderId: 'slider-programas',
     dotsId: 'dots-programas',
@@ -43,7 +43,7 @@ const sections = [
 // -----------------------------
 const state = {
   data: {},
-  filters: { arquitectura: null, programas: null, podcast: null }, // agregado podcast
+  filters: { arquitectura: null, programas: null, podcast: null },
   modals: { open: false, lastFocus: null }
 };
 
@@ -68,7 +68,6 @@ function toggleTheme() {
   setTheme(current === 'dark' ? 'light' : 'dark');
 }
 document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-// Inicializa tema preferido
 (function () {
   const saved = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -87,11 +86,17 @@ function spotifyEmbedFrom(url) {
   return null;
 }
 function cleanText(t = '') {
-  // Quita citas/copypaste tipo 【...】 y espacios extra
   return t.replace(/【[^】]*】/g, '').replace(/\s+/g, ' ').trim();
 }
 function truncate(t = '', n = 200) {
   return t.length > n ? t.slice(0, n - 1) + '…' : t;
+}
+function throttle(fn, wait = 150) {
+  let t = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - t > wait) { t = now; fn(...args); }
+  };
 }
 
 // -----------------------------
@@ -143,6 +148,10 @@ async function renderSlider(section) {
 
   bindSliderControls(section, items.length);
   if (section.filterable) renderTags(section, data);
+
+  // Igualar alturas de tarjetas (después de pintar)
+  setTimeout(() => equalizeHeights(section), 0);
+
   showLoader(false);
 }
 
@@ -195,7 +204,7 @@ function investigacionCard(item, idx) {
     </div>`;
 }
 function podcastCard(item, idx) {
-  // Tarjeta compacta con mini-embed y botón "Saber más"
+  // Botón "Saber más" y mini-embed DEBAJO. Altura consistente mediante equalizeHeights().
   const embed = spotifyEmbedFrom(item.spotifyUrl);
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
@@ -203,6 +212,11 @@ function podcastCard(item, idx) {
         <div class="card-title">${item.title}</div>
         <div class="card-meta">${item.date || ''}</div>
         <div class="card-tags">${(item.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
+
+        <button class="card-btn mt-3" data-modal="podcast" data-idx="${idx}"
+          aria-label="Saber más sobre ${item.title}">
+          Saber más
+        </button>
 
         ${embed ? `
           <div class="mt-3">
@@ -218,11 +232,6 @@ function podcastCard(item, idx) {
             ></iframe>
           </div>
         ` : ''}
-
-        <button class="card-btn mt-3" data-modal="podcast" data-idx="${idx}"
-          aria-label="Saber más sobre ${item.title}">
-          Saber más
-        </button>
       </div>
     </div>`;
 }
@@ -273,7 +282,7 @@ function bindSliderControls(section, count) {
     const card = slider.children[pageIdx];
     if (card) {
       const targetLeft = card.offsetLeft - slider.offsetLeft;
-      slider.scrollTo({ left: targetLeft, behavior: 'smooth' }); // solo eje X, evita salto vertical
+      slider.scrollTo({ left: targetLeft, behavior: 'smooth' }); // solo X, evita salto vertical
     }
     updateDots();
   }
@@ -314,6 +323,29 @@ function bindSliderControls(section, count) {
     btn.onclick = () => openModal(section.key, Number(btn.getAttribute('data-idx')));
   });
 }
+
+// -----------------------------
+// Igualar alturas de tarjetas
+// -----------------------------
+function equalizeHeights(section) {
+  const slider = document.getElementById(section.sliderId);
+  if (!slider) return;
+
+  const cards = Array.from(slider.querySelectorAll('.card'));
+  if (!cards.length) return;
+
+  // reset heights
+  cards.forEach(c => (c.style.height = ''));
+
+  // medir alturas reales
+  const max = Math.max(...cards.map(c => c.getBoundingClientRect().height));
+  cards.forEach(c => (c.style.height = `${Math.ceil(max)}px`));
+}
+
+// Recalcular en resize (con throttle)
+window.addEventListener('resize', throttle(() => {
+  sections.forEach(equalizeHeights);
+}, 200));
 
 // -----------------------------
 // Modales accesibles
