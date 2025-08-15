@@ -195,14 +195,34 @@ function investigacionCard(item, idx) {
     </div>`;
 }
 function podcastCard(item, idx) {
-  // Tarjeta compacta: sin embed ni descripción larga; botón "Saber más"
+  // Tarjeta compacta con mini-embed y botón "Saber más"
+  const embed = spotifyEmbedFrom(item.spotifyUrl);
   return `
     <div class="card" tabindex="0" aria-label="${item.title}">
       <div class="card-body">
         <div class="card-title">${item.title}</div>
         <div class="card-meta">${item.date || ''}</div>
         <div class="card-tags">${(item.tags||[]).map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
-        <button class="card-btn" data-modal="podcast" data-idx="${idx}" aria-label="Saber más sobre ${item.title}">Saber más</button>
+
+        ${embed ? `
+          <div class="mt-3">
+            <iframe
+              src="${embed}"
+              width="100%"
+              height="80"
+              frameborder="0"
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              title="Spotify"
+              style="border-radius: 0.75rem;"
+            ></iframe>
+          </div>
+        ` : ''}
+
+        <button class="card-btn mt-3" data-modal="podcast" data-idx="${idx}"
+          aria-label="Saber más sobre ${item.title}">
+          Saber más
+        </button>
       </div>
     </div>`;
 }
@@ -416,4 +436,3 @@ document.getElementById('contactForm').onsubmit = function (e) {
 // Inicialización: Renderiza sliders
 // -----------------------------
 sections.forEach(renderSlider);
-
