@@ -104,7 +104,7 @@ function pdfEmbed(url, height = 520) {
   const safe = encodeURI(url);
   const withOpts = `${safe}#view=FitH&zoom=page-width&navpanes=0&toolbar=1&scrollbar=1`;
   return `
-    <div class="pdf-wrapper" style="margin-top:12px;">
+    <div class="pdf-wrapper">
       <iframe
         src="${withOpts}"
         title="Ficha PDF"
@@ -395,24 +395,28 @@ function openModal(sectionKey, idx) {
   let html = '';
 
   if (sectionKey === 'arquitectura') {
+    // Layout 2 columnas (info izquierda, PDF derecha). En móviles se apila.
     html = `
-      <h4 class="text-xl font-bold mb-1">${item.title}</h4>
-      <div>${item.location}, ${item.year}</div>
-      <div class="mb-2">${item.summary}</div>
-      <div><b>Tags:</b> ${(item.tags || []).join(', ')}</div>
-      <div><b>Roles:</b> ${(item.roles || []).join(', ')}</div>
-
-      ${(item.images && item.images.length)
-        ? `
-          <div class="mb-2"><b>Imágenes:</b></div>
-          <div class="flex gap-2 mb-2" style="flex-wrap:wrap">
-            ${item.images.map(img=>`<img src="${img}" alt="Imagen ${item.title}" style="width:90px;height:90px;object-fit:cover;border-radius:0.6em;">`).join('')}
-          </div>
-        `
-        : ''
-      }
-
-      ${item.pdf ? pdfEmbed(item.pdf, 520) : ''}
+      <style>
+        .modal-flex { display:block; }
+        @media (min-width: 980px) {
+          .modal-flex { display:flex; gap:18px; align-items:flex-start; }
+          .modal-col  { flex:1 1 0; }
+        }
+      </style>
+      <div class="modal-flex">
+        <div class="modal-col">
+          <h4 class="text-xl font-bold mb-1">${item.title}</h4>
+          <div class="mb-1">${item.location}, ${item.year}</div>
+          <div class="mb-3">${item.summary}</div>
+          <div class="mb-1"><b>Tags:</b> ${(item.tags || []).join(', ')}</div>
+          <div class="mb-3"><b>Roles:</b> ${(item.roles || []).join(', ')}</div>
+          ${!item.pdf ? `<div class="mt-2"><i>No hay PDF adjunto.</i></div>` : ''}
+        </div>
+        <div class="modal-col">
+          ${item.pdf ? pdfEmbed(item.pdf, 520) : ''}
+        </div>
+      </div>
     `;
   }
 
