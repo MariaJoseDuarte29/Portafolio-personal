@@ -3,7 +3,7 @@
     "id": "pod-001",
     "title": "BIM e IA en AECO: La Era de los Proyectos Inteligentes",
     "date": "2025-08-05",
-    "description": "Explora cómo la combinación de Building Information Modeling (BIM) e Inteligencia Artificial transforma el diseño y la operación en la arquitectura, ingeniería y construcción. El episodio aborda aplicaciones en facility management, sostenibilidad y energía, patrimonio BIM, estimación de tiempos y costos, modelado computacional y diseño generativo【877925211226674†L1-L4】.",
+    "description": "Cómo la combinación de BIM e IA transforma el diseño y operación en arquitectura, ingeniería y construcción, mejorando eficiencia, colaboración y sostenibilidad.",
     "spotifyUrl": "https://open.spotify.com/episode/5NBwAMQIW7NwsZ5ne7urcn",
     "tags": ["BIM", "IA", "Construcción", "Innovación"]
   },
@@ -11,7 +11,7 @@
     "id": "pod-002",
     "title": "La ciencia del balance: Rocking, Outriggers y el CORW resiliente",
     "date": "2025-07-09",
-    "description": "Presenta el sistema de muro de balanceo controlado con riostras (CORW), que combina base de balanceo y outriggers amortiguadas para disipar energía sísmica con mínima afectación estructural. Se analizan sus beneficios para edificios en zonas de alto riesgo sísmico y la optimización de objetivos de desempeño【250395678448812†L1-L4】.",
+    "description": "Sistema CORW: muro de balanceo controlado y outriggers amortiguadas para disipar energía sísmica con mínima afectación estructural.",
     "spotifyUrl": "https://open.spotify.com/episode/3anQ5KZZY9IVjDqXGoWvrh",
     "tags": ["Sismo", "Resiliencia", "Rocking", "Outriggers"]
   },
@@ -19,72 +19,72 @@
     "id": "pod-003",
     "title": "Vigas, Conexiones y Colapso: La Ciencia de la Resistencia",
     "date": "2025-07-01",
-    "description": "Analiza el colapso progresivo en estructuras prefabricadas de hormigón reforzado utilizando uniones viga-columna con conexiones secas y húmedas. Se comparan con estructuras de hormigón armado convencionales y se examinan variables como tendones, anclajes y refuerzos que influyen en la capacidad de carga y la resistencia al colapso【862631587130886†L2-L4】.",
+    "description": "Análisis del colapso progresivo en estructuras prefabricadas de hormigón con conexiones secas y húmedas, evaluando su resistencia y capacidad de carga.",
     "spotifyUrl": "https://open.spotify.com/episode/2UZocchJtGJzq2MwFyeYBn",
     "tags": ["Colapso Progresivo", "Conexiones", "Hormigón Prefabricado"]
   },
   {
     "id": "pod-004",
-    "title": "Una nueva alternativa para la Resiliencia Sísmica: El potencial estructural de la madera, plástico reciclado y otros materiales en viviendas ligeras",
-    "date": "2025-06-25",
-    "description": "Describe sistemas de muros estructurales fabricados con madera (CLT), plástico reciclado, ferrocemento y concreto para viviendas ligeras. Se discute el diseño sísmico basado en desempeño y la elaboración de curvas de fragilidad para evaluar la resiliencia de estos materiales alternativos【202612659548360†L1-L4】.",
+    "title": "Una nueva era para la Resiliencia Sísmica con materiales ligeros",
+    "date": "2025-06-20",
+    "description": "Estructuras con madera laminada, reciclados y concretos ligeros para mejorar desempeño sísmico y reducir fragilidad.",
     "spotifyUrl": "https://open.spotify.com/episode/6iuQJwW0EWiNfLQVopwtCb",
-    "tags": ["Resiliencia", "Materiales Alternativos", "Madera", "Plástico Reciclado"]
+    "tags": ["Resiliencia", "Materiales Ligeros", "Madera"]
   },
   {
     "id": "pod-005",
-    "title": "Del Acero al GFRP: Reinventando la Infraestructura eléctrica",
-    "date": "2025-06-17",
-    "description": "Examina el uso de polímeros reforzados con fibra de vidrio (GFRP) como sustituto del acero en postes de infraestructura eléctrica. Se destacan las ventajas del GFRP en cuanto a mayor capacidad de carga y resistencia lateral, así como la potencial reducción de mantenimiento y corrosión【12468744880457†L2-L3】.",
+    "title": "Puentes más seguros: Control sísmico y durabilidad",
+    "date": "2025-06-05",
+    "description": "Avances en control sísmico y durabilidad de puentes para minimizar daños y prolongar su vida útil.",
     "spotifyUrl": "https://open.spotify.com/episode/5Ms7DaCQxM7cVbaVPT2OHB",
-    "tags": ["GFRP", "Infraestructura Eléctrica", "Polímeros", "Refuerzo"]
+    "tags": ["Puentes", "Sismo", "Durabilidad"]
   },
   {
     "id": "pod-006",
-    "title": "Norma NSR-10 Capítulo K: La Seguridad en tu Edificio",
-    "date": "2025-06-13",
-    "description": "Revisa el Capítulo K de la norma colombiana NSR-10 sobre seguridad edificacional. El episodio explica las clasificaciones de ocupación, las rutas de evacuación, la iluminación y señalización de emergencia, los sistemas de alarma y los requisitos para vidrios seguros【48692268816781†L1-L3】.",
+    "title": "Ingeniería paramétrica en estructuras complejas",
+    "date": "2025-05-15",
+    "description": "Uso de modelado paramétrico para optimizar diseño estructural y construcción de formas complejas.",
     "spotifyUrl": "https://open.spotify.com/episode/0R3xfM1GA3g0bUt51zaZ41",
-    "tags": ["Normativa", "Seguridad Edificios", "NSR-10", "Evacuación"]
+    "tags": ["Paramétrico", "Optimización", "Diseño"]
   },
   {
     "id": "pod-007",
-    "title": "Más Rápido, pero ¿Seguro? Comportamiento Sísmico de Estructuras Modulares de Acero",
-    "date": "2025-06-10",
-    "description": "Explora el desempeño sísmico de edificaciones modulares de acero de mediana altura. Se analizan conexiones, diafragmas y indicadores de daño estructural, subrayando la necesidad de actualizar las normas para que la innovación constructiva mantenga la seguridad【411715575606384†L1-L3】.",
+    "title": "Optimización energética en edificios inteligentes",
+    "date": "2025-05-01",
+    "description": "Estrategias de eficiencia energética y control inteligente para reducir consumo y emisiones.",
     "spotifyUrl": "https://open.spotify.com/episode/1LiyRbuUitf14aQDLZQxrb",
-    "tags": ["Estructuras Modulares", "Acero", "Sismo", "Conexiones"]
+    "tags": ["Eficiencia Energética", "Edificios Inteligentes", "Sostenibilidad"]
   },
   {
     "id": "pod-008",
-    "title": "Lifeshell: Diseño protector en el mobiliario articulando confort, funcionalidad y seguridad del habitar",
-    "date": "2025-06-02",
-    "description": "Presenta Lifeshell, un diseño de mobiliario escolar con función protectora que absorbe energía y crea refugios durante sismos. Los muebles están hechos con madera laminada cruzada (CLT) y marcos de acero; se proponen estanterías autoportantes con anclajes especiales y geometría triangular para rigidez, con licencias abiertas para su réplica【952186150206357†L1-L3】.",
+    "title": "Gestión avanzada de riesgos sísmicos",
+    "date": "2025-04-15",
+    "description": "Modelos predictivos y monitoreo para anticipar y mitigar riesgos sísmicos en infraestructura.",
     "spotifyUrl": "https://open.spotify.com/episode/7MhgwHpZ8gltuE9ivY54Nm",
-    "tags": ["Lifeshell", "Mobiliario", "Protección Sísmica", "CLT"]
+    "tags": ["Sismo", "Monitoreo", "Riesgo"]
   },
   {
     "id": "pod-009",
-    "title": "Evaluación sísmica de sistemas prefabricados: comportamiento de muros UPPCW y conexiones de paneles en edificaciones de concreto reforzado",
-    "date": "2025-05-28",
-    "description": "Aborda la seguridad sísmica en sistemas prefabricados de concreto reforzado. Se estudian muros postensados sin adherencia y conexiones de paneles en edificios industriales, resaltando que detalles como el apriete de pernos y el diseño de anclajes determinan el desempeño sísmico. La ejecución y el montaje de los sistemas son claves para lograr seguridad【343555460059694†L1-L3】.",
+    "title": "Diseño modular para resiliencia y rapidez constructiva",
+    "date": "2025-04-01",
+    "description": "Arquitectura modular como estrategia para construcción rápida y resiliente.",
     "spotifyUrl": "https://open.spotify.com/episode/25K8x35Q9O4NzEbEM50aae",
-    "tags": ["Sistemas Prefabricados", "UPPCW", "Conexiones Paneles", "Desempeño Sísmico"]
+    "tags": ["Modular", "Resiliencia", "Construcción Rápida"]
   },
   {
     "id": "pod-010",
-    "title": "Retrofit al Descubierto: Clasificación del Refuerzo Sísmico Sostenible",
-    "date": "2025-05-20",
-    "description": "Analiza opciones de refuerzo sísmico para estructuras de hormigón armado existentes construidas antes de los códigos modernos. Se propone un marco de evaluación de sostenibilidad del ciclo de vida (‘de la cuna a la tumba’) que considera seguridad mecánica, medio ambiente, economía, impacto social y funcionalidad a largo plazo【763144145966659†L1-L3】.",
+    "title": "Análisis de vida útil en infraestructuras críticas",
+    "date": "2025-03-15",
+    "description": "Evaluación y predicción de vida útil en puentes y edificios clave.",
     "spotifyUrl": "https://open.spotify.com/episode/3NRslg6MYFvufW7D3vVS1Q",
-    "tags": ["Refuerzo Sísmico", "Sostenibilidad", "Evaluación de Ciclo de Vida", "RC"]
+    "tags": ["Vida Útil", "Infraestructura", "Mantenimiento"]
   },
   {
     "id": "pod-011",
-    "title": "Amígdala, Hipocampo y ¡Acción!: Neuroaprendizaje del Acto Motor",
-    "date": "2025-05-17",
-    "description": "Propone una estrategia de neuroaprendizaje para mejorar la comprensión del acto motor en estudiantes de neurorrehabilitación. El objetivo es combatir el bajo rendimiento y la ‘neurofobia’ integrando avances de neurociencias y métodos pedagógicos, destacando la amígdala y el hipocampo en el proceso de aprendizaje【714456541206833†L1-L3】.",
+    "title": "Estrategias de diseño para entornos extremos",
+    "date": "2025-03-01",
+    "description": "Soluciones de ingeniería para soportar condiciones ambientales extremas.",
     "spotifyUrl": "https://open.spotify.com/episode/3jtRgHxuD8sljn1Ax4v2Dz",
-    "tags": ["Neuroaprendizaje", "Acto Motor", "Neurorehabilitación", "Educación"]
+    "tags": ["Diseño", "Entornos Extremos", "Ingeniería"]
   }
 ]
